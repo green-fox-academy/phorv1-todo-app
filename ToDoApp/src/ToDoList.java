@@ -8,19 +8,6 @@ public class ToDoList {
   Path listtasksText;
   Path printusageText;
 
-  public void ListTask() {
-    try {
-      listtasksText = Paths.get("listtasks.txt");
-      List<String> orderedList = Files.readAllLines(listtasksText);
-      for (int i = 0; i < orderedList.size(); i++) {
-        System.out.println(i + 1 + " " + orderedList.get(i));
-      }
-    } catch (IOException e) {
-      e.printStackTrace();
-      System.out.println("Uh-oh, could not read the file!");
-    }
-  }
-
   public void NoArgument() {
     try {
       printusageText = Paths.get("printusage.txt");
@@ -33,5 +20,24 @@ public class ToDoList {
       System.out.println("Uh-oh, could not read the file!");
     }
   }
+
+  public void ListTask() {
+    try {
+      listtasksText = Paths.get("listtasks.txt");
+      List<String> orderedList = Files.readAllLines(listtasksText);
+      if (orderedList.size() == 0) {
+        System.out.println("nothing to do today! :)");
+      } else {
+        for (int i = 0; i < orderedList.size(); i++) {
+          System.out.println(i + 1 + " - " + orderedList.get(i));
+        }
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+      System.out.println("Uh-oh, could not read the file!");
+    }
+  }
+
+
 }
 
