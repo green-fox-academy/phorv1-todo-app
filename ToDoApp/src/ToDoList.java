@@ -2,11 +2,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ToDoList {
   Path listtasksText;
   Path printusageText;
+  List<String> addContent;
+  String[] args;
 
   public void NoArgument() {
     try {
@@ -35,6 +38,19 @@ public class ToDoList {
     } catch (IOException e) {
       e.printStackTrace();
       System.out.println("Uh-oh, could not read the file!");
+    }
+  }
+
+  public void AddTask(String[] args) {
+      Path tasks = Paths.get("listtasks.txt");
+      List<String> list;
+    try {
+      list = Files.readAllLines(tasks);
+      list.add(list.size(), args[1]);
+      Files.write(tasks, list);
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.out.println("Uh-oh, could not write the file!");
     }
   }
 

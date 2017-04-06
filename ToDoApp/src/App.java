@@ -1,6 +1,4 @@
 
-import java.util.Arrays;
-
 public class App {
 
   public static void main(String[] args) {
@@ -12,6 +10,8 @@ public class App {
       toDoList.NoArgument();
     } else if (args[0].contains("-l")) {
       toDoList.ListTask();
+    } else if (args[0].contains("-a")){
+      toDoList.AddTask(args);
     }
   }
 }
