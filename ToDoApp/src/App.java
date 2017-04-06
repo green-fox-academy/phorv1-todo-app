@@ -10,8 +10,9 @@ public class App {
       toDoList.NoArgument();
     } else if (args[0].contains("-l")) {
       toDoList.ListTask();
-    } else if (args[0].contains("-a")){
+    } else if (args[0].contains("-a")) {
       toDoList.AddTask(args);
-    }
+    } else if (args[0].contains("-r")) ;
+      toDoList.RemoveTask(args);
   }
 }

@@ -52,6 +52,17 @@ public class ToDoList {
     }
   }
 
-
+  public void RemoveTask(String[] args) {
+    Path tasks = Paths.get("listtasks.txt");
+    List<String> list;
+    try {
+      list = Files.readAllLines(tasks);
+      list.remove(Integer.parseInt(args[1]) - 1);
+      Files.write(tasks, list);
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.out.println("Uh-oh, could not write the file!");
+    }
+  }
 }
 
