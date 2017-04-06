@@ -8,8 +8,6 @@ import java.util.List;
 public class ToDoList {
   Path listtasksText;
   Path printusageText;
-  List<String> addContent;
-  String[] args;
 
   public void NoArgument() {
     try {
