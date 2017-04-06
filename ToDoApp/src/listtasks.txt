@@ -1,4 +1,4 @@
-Walk the dog
-Do homework
-Monkeeeeeys
-Patrik
+[ ]Do homework
+[ ]Task2
+[x]Taskcd2
+[ ]TaskB

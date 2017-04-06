@@ -18,7 +18,6 @@ public class ToDoList {
       }
     } catch (IOException e) {
       e.printStackTrace();
-      System.out.println("Uh-oh, could not read the file!");
     }
   }
 
@@ -35,7 +34,6 @@ public class ToDoList {
       }
     } catch (IOException e) {
       e.printStackTrace();
-      System.out.println("Uh-oh, could not read the file!");
     }
   }
 
@@ -44,7 +42,7 @@ public class ToDoList {
       List<String> list;
     try {
       list = Files.readAllLines(tasks);
-      list.add(list.size(), args[1]);
+      list.add(list.size(), "[ ]" + args[1]);
       Files.write(tasks, list);
     } catch (Exception e) {
       e.printStackTrace();
@@ -57,12 +55,34 @@ public class ToDoList {
     List<String> list;
     try {
       list = Files.readAllLines(tasks);
+      if (args.length == 1){
+        System.out.println("System error: No index is provided");
+      } else if (Integer.parseInt(args[1]) > list.size()) {
+        System.out.println("System error: Index is out of list size");
+      } else {
       list.remove(Integer.parseInt(args[1]) - 1);
+      Files.write(tasks, list);
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void CheckTask(String[] args) {
+    Path tasks = Paths.get("listtasks.txt");
+    List<String> list;
+    String chosenTask;
+    try {
+      list = Files.readAllLines(tasks);
+      chosenTask = list.get(Integer.parseInt(args[1]) - 1);
+      String newString = chosenTask.replaceFirst(" ", "x");
+      list.set((Integer.parseInt(args[1]) - 1), newString);
       Files.write(tasks, list);
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Uh-oh, could not write the file!");
     }
   }
+
 }
 

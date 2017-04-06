@@ -12,7 +12,10 @@ public class App {
       toDoList.ListTask();
     } else if (args[0].contains("-a")) {
       toDoList.AddTask(args);
-    } else if (args[0].contains("-r")) ;
+    } else if (args[0].contains("-r")) {
       toDoList.RemoveTask(args);
+    } else if (args[0].contains("-c")) {
+      toDoList.CheckTask(args);
+    }
   }
 }
