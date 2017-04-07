@@ -29,7 +29,12 @@ public class ToDoList {
         System.out.println("nothing to do today! :)");
       } else {
         for (int i = 0; i < orderedList.size(); i++) {
-          System.out.println(i + 1 + " - " + orderedList.get(i));
+          if (i < 9) {
+            System.out.println(" " + (i + 1) + " - " + orderedList.get(i));
+
+          } else {
+            System.out.println(i + 1 + " - " + orderedList.get(i));
+          }
         }
       }
     } catch (IOException e) {
@@ -89,9 +94,7 @@ public class ToDoList {
       }
     } catch (Exception e) {
       e.printStackTrace();
-      System.out.println("Uh-oh, could not write the file!");
     }
   }
-
 }
 
