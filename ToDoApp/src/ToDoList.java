@@ -67,7 +67,7 @@ public class ToDoList {
       Files.write(tasks, list);
       }
     } catch (Exception e) {
-      e.printStackTrace();
+      System.out.println("System error: Index is not a number!");
     }
   }
 
