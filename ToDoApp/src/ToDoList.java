@@ -42,11 +42,14 @@ public class ToDoList {
       List<String> list;
     try {
       list = Files.readAllLines(tasks);
+      if (args.length == 1) {
+        System.out.println("System error: No task is provided!");
+      } else {
       list.add(list.size(), "[ ]" + args[1]);
       Files.write(tasks, list);
+      }
     } catch (Exception e) {
       e.printStackTrace();
-      System.out.println("Uh-oh, could not write the file!");
     }
   }
 
@@ -56,9 +59,9 @@ public class ToDoList {
     try {
       list = Files.readAllLines(tasks);
       if (args.length == 1){
-        System.out.println("System error: No index is provided");
+        System.out.println("System error: No index is provided!");
       } else if (Integer.parseInt(args[1]) > list.size()) {
-        System.out.println("System error: Index is out of list size");
+        System.out.println("System error: Index is out of list size!");
       } else {
       list.remove(Integer.parseInt(args[1]) - 1);
       Files.write(tasks, list);
