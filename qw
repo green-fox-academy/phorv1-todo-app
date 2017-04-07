@@ -1,0 +1,137 @@
+[1mdiff --git a/ToDoApp/src/ToDoList.java b/ToDoApp/src/ToDoList.java[m
+[1mindex c75ce03..4ca7db4 100644[m
+[1m--- a/ToDoApp/src/ToDoList.java[m
+[1m+++ b/ToDoApp/src/ToDoList.java[m
+[36m@@ -8,6 +8,13 @@[m [mimport java.util.List;[m
+ public class ToDoList {[m
+   Path listtasksText;[m
+   Path printusageText;[m
+[32m+[m[32m  List<String> list;[m
+[32m+[m[32m  String errorNoTask = "System error: No task is provided!";[m
+[32m+[m[32m  String errorNoIndex = "System error: No index is provided!";[m
+[32m+[m[32m  String errorOutIndex = "System error: Index is out of list size!";[m
+[32m+[m[32m  String errorNotNumber = "System error: Index is not a number!";[m
+[32m+[m[32m  String updatedList = "Here is your new list:";[m
+[32m+[m[32m  String taskFile = "listtasks.txt";[m
+ [m
+   public void NoArgument() {[m
+     try {[m
+[36m@@ -23,7 +30,7 @@[m [mpublic class ToDoList {[m
+ [m
+   public void ListTask() {[m
+     try {[m
+[31m-      listtasksText = Paths.get("listtasks.txt");[m
+[32m+[m[32m      listtasksText = Paths.get(taskFile);[m
+       List<String> orderedList = Files.readAllLines(listtasksText);[m
+       if (orderedList.size() == 0) {[m
+         System.out.println("nothing to do today! :)");[m
+[36m@@ -31,7 +38,6 @@[m [mpublic class ToDoList {[m
+         for (int i = 0; i < orderedList.size(); i++) {[m
+           if (i < 9) {[m
+             System.out.println(" " + (i + 1) + " - " + orderedList.get(i));[m
+[31m-[m
+           } else {[m
+             System.out.println(i + 1 + " - " + orderedList.get(i));[m
+           }[m
+[36m@@ -43,57 +49,62 @@[m [mpublic class ToDoList {[m
+   }[m
+ [m
+   public void AddTask(String[] args) {[m
+[31m-    Path tasks = Paths.get("listtasks.txt");[m
+[31m-    List<String> list;[m
+[32m+[m[32m    listtasksText = Paths.get(taskFile);[m
+     try {[m
+[31m-      list = Files.readAllLines(tasks);[m
+[32m+[m[32m      list = Files.readAllLines(listtasksText);[m
+       if (args.length == 1) {[m
+[31m-        System.out.println("System error: No task is provided!");[m
+[32m+[m[32m        System.out.println(errorNoTask);[m
+       } else {[m
+         list.add(list.size(), "[ ]" + args[1]);[m
+[31m-        Files.write(tasks, list);[m
+[32m+[m[32m        Files.write(listtasksText, list);[m
+       }[m
+[32m+[m[32m      System.out.println("Here is your new list:");[m
+[32m+[m[32m      ListTask();[m
+[32m+[m[32m      System.out.println();[m
+     } catch (Exception e) {[m
+[31m-      e.printStackTrace();[m
+     }[m
+   }[m
+ [m
+   public void RemoveTask(String[] args) {[m
+[31m-    Path tasks = Paths.get("listtasks.txt");[m
+[31m-    List<String> list;[m
+[32m+[m[32m    listtasksText = Paths.get(taskFile);[m
+     try {[m
+[31m-      list = Files.readAllLines(tasks);[m
+[32m+[m[32m      list = Files.readAllLines(listtasksText);[m
+       if (args.length == 1) {[m
+[31m-        System.out.println("System error: No index is provided!");[m
+[32m+[m[32m        System.out.println(errorNoIndex);[m
+       } else if (Integer.parseInt(args[1]) > list.size()) {[m
+[31m-        System.out.println("System error: Index is out of list size!");[m
+[32m+[m[32m        System.out.println(errorOutIndex);[m
+       } else {[m
+         list.remove(Integer.parseInt(args[1]) - 1);[m
+[31m-        Files.write(tasks, list);[m
+[32m+[m[32m        Files.write(listtasksText, list);[m
+       }[m
+[32m+[m[32m      System.out.println(updatedList);[m
+[32m+[m[32m      ListTask();[m
+[32m+[m[32m      System.out.println();[m
+     } catch (Exception e) {[m
+[31m-      System.out.println("System error: Index is not a number!");[m
+[32m+[m[32m      System.out.println(errorNotNumber);[m
+     }[m
+   }[m
+ [m
+   public void CheckTask(String[] args) {[m
+[31m-    Path tasks = Paths.get("listtasks.txt");[m
+[31m-    List<String> list;[m
+[32m+[m[32m    listtasksText = Paths.get(taskFile);[m
+     String chosenTask;[m
+     try {[m
+[31m-      list = Files.readAllLines(tasks);[m
+[32m+[m[32m      list = Files.readAllLines(listtasksText);[m
+       if (args.length == 1) {[m
+[31m-        System.out.println("System error: No index is provided!");[m
+[32m+[m[32m        System.out.println(errorNoIndex);[m
+       } else if (Integer.parseInt(args[1]) > list.size()) {[m
+[31m-        System.out.println("System error: Index is out of list size!");[m
+[32m+[m[32m        System.out.println(errorOutIndex);[m
+       } else {[m
+         chosenTask = list.get(Integer.parseInt(args[1]) - 1);[m
+         String newString = chosenTask.replaceFirst(" ", "x");[m
+         list.set((Integer.parseInt(args[1]) - 1), newString);[m
+[31m-        Files.write(tasks, list);[m
+[32m+[m[32m        Files.write(listtasksText, list);[m
+       }[m
+[32m+[m[32m      System.out.println(updatedList);[m
+[32m+[m[32m      ListTask();[m
+[32m+[m[32m      System.out.println();[m
+     } catch (Exception e) {[m
+[31m-      e.printStackTrace();[m
+[32m+[m[32m      System.out.println(errorNotNumber);[m
+     }[m
+   }[m
+ }[m
+[1mdiff --git a/ToDoApp/src/listtasks.txt b/ToDoApp/src/listtasks.txt[m
+[1mindex 3ed2160..4cdb139 100644[m
+[1m--- a/ToDoApp/src/listtasks.txt[m
+[1m+++ b/ToDoApp/src/listtasks.txt[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-[ ]Do homework[m
+[32m+[m[32m[x]Do homework[m
+ [ ]Task2[m
+ [x]Taskcd2[m
+ [ ]TaskB[m
+[36m@@ -6,6 +6,6 @@[m
+ [ ]Walk Home[m
+ [ ]Go training[m
+ [ ]Buy bust ticket[m
+[31m-[ ]Learn new things[m
+[31m-[ ]Daddies birthday[m
+[32m+[m[32m[x]Learn new things[m
+[32m+[m[32m[x]Daddiesxbirthday[m
+ [ ]Daddies birthday[m

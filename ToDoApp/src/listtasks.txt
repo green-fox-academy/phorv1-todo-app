@@ -1,4 +1,4 @@
-[ ]Do homework
+[x]Do homework
 [ ]Task2
 [x]Taskcd2
 [ ]TaskB
@@ -6,6 +6,6 @@
 [ ]Walk Home
 [ ]Go training
 [ ]Buy bust ticket
-[ ]Learn new things
-[ ]Daddies birthday
+[x]Learn new things
+[x]Daddiesxbirthday
 [ ]Daddies birthday
